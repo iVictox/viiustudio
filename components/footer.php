@@ -3,8 +3,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 bg-[#0040A8] rounded flex items-center justify-center text-white font-bold">V</div>
-                        <span class="text-xl font-bold text-[#0040A8]"><?php echo $info['nombre']; ?></span>
+                        <img src="/viiu-studio/assets/img/logo.svg" style="max-width: 200px;">
                     </div>
                     <p class="text-gray-500 mb-4 max-w-sm">
                         <?php echo $info['descripcion']; ?>

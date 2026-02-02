@@ -5,22 +5,21 @@ $info = [
     'nombre' => 'Viiu Studio',
     'slogan' => 'Tu socio tecnológico de confianza',
     'descripcion' => 'Agencia de desarrollo de software enfocada en soluciones reales. Creamos sistemas, páginas web y aplicaciones a medida bajo un modelo de suscripción accesible.',
-    'telefono' => '+58 412 000 0000', // Actualiza con tu número real
-    'email' => 'contacto@viiustudio.com',
+    'telefono' => '+58 412 77 03302', // Actualiza con tu número real
+    'email' => 'contacto@viiu.studio',
     'direccion' => 'Valencia, Carabobo, Venezuela',
-    'whatsapp_link' => 'https://wa.me/584120000000', // Link directo
+    'whatsapp_link' => 'wa.link/qqpvld', // Link directo
     'instagram' => '@viiustudio',
     'linkedin' => 'viiu-studio',
     'color_primary' => '#0040A8'
 ];
 
 // Definición de Servicios / Planes de Suscripción
-// Precios referenciales competitivos para el mercado LATAM/Global
 $planes = [
     'basico' => [
         'titulo' => 'Presencia Digital',
         'subtitulo' => 'Ideal para profesionales y emprendedores',
-        'precio' => '45', // Dólares mensuales
+        'precio' => '49', 
         'features' => [
             'Landing Page de Alto Impacto',
             'Hosting y Dominio Incluido',
@@ -34,7 +33,7 @@ $planes = [
     'estandar' => [
         'titulo' => 'Negocio Dinámico',
         'subtitulo' => 'Para pymes que necesitan gestionar contenido',
-        'precio' => '85', // Dólares mensuales
+        'precio' => '99', 
         'features' => [
             'Sitio Web Multi-página (Hasta 5)',
             'Panel Autoadministrable',
@@ -44,7 +43,7 @@ $planes = [
             'Correo Corporativo Incluido',
             'Mantenimiento Mensual Prioritario'
         ],
-        'recomendado' => true // Este plan saldrá destacado
+        'recomendado' => true 
     ],
     'pro' => [
         'titulo' => 'Sistemas a Medida',

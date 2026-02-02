@@ -77,7 +77,7 @@ include 'components/header.php';
                         <div class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1 mr-3">
                             <i class="fas fa-check text-xs text-[#0040A8]"></i>
                         </div>
-                        <span class="text-slate-700"><strong>Escalabilidad:</strong> ¿Empiezas pequeño? Bien. ¿Cresces mañana? Mejoramos tu plan al instante.</span>
+                        <span class="text-slate-700"><strong>Escalabilidad:</strong> ¿Empiezas pequeño? Bien. ¿Creces mañana? Mejoramos tu plan al instante.</span>
                     </li>
                 </ul>
 
