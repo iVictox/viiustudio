@@ -41,6 +41,7 @@ $planes = [
             'Integración con Redes Sociales',
             'Optimización SEO Básica',
             'Correo Corporativo Incluido',
+            'Prioridad de desarrollo',
             'Mantenimiento Mensual Prioritario'
         ],
         'recomendado' => true 
@@ -56,6 +57,7 @@ $planes = [
             'API RESTful',
             'Tiendas Online (E-commerce)',
             'Soporte 24/7',
+            'Prioridad de desarrollo',
             'Infraestructura Escalable'
         ],
         'recomendado' => false

@@ -1,0 +1,23 @@
+name: Auto Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main  # O la rama que quieras desplegar (ej. master)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            cd /var/www/fastuser/data/www/viiu.studio
+            git pull origin main
+            # Si necesitas reiniciar servicios (ej. nginx o node), agrégalo aquí:
+            # systemctl reload nginx
