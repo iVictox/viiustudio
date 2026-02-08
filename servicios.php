@@ -1,14 +1,14 @@
 <?php
-// servicios.php - Viiu Studio
-// Muestra los planes dinámicos configurados desde el Admin Panel
-
-// Conexión a Base de Datos
-require 'admin/config/db.php'; 
+// servicios.php - Viiu Studio (Versión Corregida)
+// Usamos require_once para evitar errores de doble carga en la BD
+require_once 'admin/config/db.php'; 
 
 // Configuración de la página
 $pageTitle = "Planes y Precios | Viiu Studio";
-include 'components/header.php';
-include 'components/navbar.php';
+
+// Usamos include_once para evitar el error "Cannot redeclare nav_classes()"
+include_once 'components/header.php';
+include_once 'components/navbar.php'; 
 
 // Definir estructura de categorías para ordenamiento visual
 $categorias_planes = [
@@ -40,9 +40,9 @@ try {
 
     // Organizar los planes en sus categorías
     foreach ($planes_db as $plan) {
-        $cat = $plan['categoria'];
-        // Decodificar las características (JSON a Array)
-        $plan['features'] = json_decode($plan['features'], true);
+        // Validación de seguridad por si faltan campos
+        $cat = $plan['categoria'] ?? 'web';
+        $plan['features'] = json_decode($plan['features'] ?? '[]', true);
         
         if (isset($categorias_planes[$cat])) {
             $categorias_planes[$cat]['planes'][] = $plan;
@@ -106,10 +106,10 @@ foreach ($categorias_planes as $key => $categoria):
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
             <?php foreach ($categoria['planes'] as $plan): 
-                $esDestacado = $plan['destacado'];
-                $setupFee = floatval($plan['setup_fee']);
-                $descuento = intval($plan['descuento_anual']);
-                $precio = floatval($plan['precio']);
+                $esDestacado = $plan['destacado'] ?? 0;
+                $setupFee = floatval($plan['setup_fee'] ?? 0);
+                $descuento = intval($plan['descuento_anual'] ?? 0);
+                $precio = floatval($plan['precio'] ?? 0);
                 $precio_entero = floor($precio);
                 $precio_decimal = sprintf("%02d", ($precio - $precio_entero) * 100);
             ?>
