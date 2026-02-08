@@ -1,5 +1,5 @@
 RewriteEngine On
-
+#
 # 1. Forzar HTTPS (Opcional, pero recomendado ya que arreglaste el SSL)
 # Si alguien entra por http, lo manda a https
 # RewriteCond %{HTTPS} off
