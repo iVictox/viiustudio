@@ -1,6 +1,6 @@
 <?php
 // admin/config/db.php
-$host = '147.93.144.236';
+$host = '127.0.0.1';
 $db   = 'viiu_studio_db';
 $user = 'viiu_studio_usr'; 
 $pass = 'oIYzqt}Yv{1!ouv[';     
