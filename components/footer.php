@@ -3,7 +3,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center space-x-2 mb-4">
-                        <img src="/viiu-studio/assets/img/logo.svg" style="max-width: 200px;">
+                        <img src="assets/img/logo.svg" style="max-width: 200px;">
                     </div>
                     <p class="text-gray-500 mb-4 max-w-sm">
                         <?php echo $info['descripcion']; ?>
@@ -18,10 +18,10 @@
                 <div>
                     <h3 class="font-bold text-gray-900 mb-4">Empresa</h3>
                     <ul class="space-y-2 text-gray-500">
-                        <li><a href="nosotros.php" class="hover:text-[#0040A8] transition-colors">Sobre Nosotros</a></li>
-                        <li><a href="servicios.php" class="hover:text-[#0040A8] transition-colors">Nuestros Planes</a></li>
-                        <li><a href="portafolio.php" class="hover:text-[#0040A8] transition-colors">Proyectos</a></li>
-                        <li><a href="contacto.php" class="hover:text-[#0040A8] transition-colors">Trabaja con nosotros</a></li>
+                        <li><a href="https://viiu.studio/nosotros" class="hover:text-[#0040A8] transition-colors">Sobre Nosotros</a></li>
+                        <li><a href="https://viiu.studio/servicios" class="hover:text-[#0040A8] transition-colors">Nuestros Planes</a></li>
+                        <li><a href="https://viiu.studio/portafolio" class="hover:text-[#0040A8] transition-colors">Proyectos</a></li>
+                        <li><a href="https://viiu.studio/contacto" class="hover:text-[#0040A8] transition-colors">Trabaja con nosotros</a></li>
                     </ul>
                 </div>
 
