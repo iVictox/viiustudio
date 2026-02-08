@@ -18,7 +18,7 @@ function nav_classes($page_name, $current_page) {
 <nav class="fixed w-full z-50 top-0 start-0 border-b border-gray-200/20 bg-white/90 backdrop-blur-md transition-all duration-300" id="mainNavbar">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="index.php" class="flex items-center space-x-3 rtl:space-x-reverse group">
-      <img src="/viiu-studio/assets/img/logo.svg" style="max-width: 230px;">
+      <img src="assets/img/logo.svg" style="max-width: 230px;">
     </a>
 
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -35,16 +35,16 @@ function nav_classes($page_name, $current_page) {
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
       <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
         <li>
-          <a href="index.php" class="<?php echo nav_classes('index.php', $current_page); ?>">Inicio</a>
+          <a href="https://viiu.studio/" class="<?php echo nav_classes('index.php', $current_page); ?>">Inicio</a>
         </li>
         <li>
-          <a href="servicios.php" class="<?php echo nav_classes('servicios.php', $current_page); ?>">Servicios</a>
+          <a href="https://viiu.studio/servicios" class="<?php echo nav_classes('servicios.php', $current_page); ?>">Servicios</a>
         </li>
         <li>
-          <a href="portafolio.php" class="<?php echo nav_classes('portafolio.php', $current_page); ?>">Portafolio</a>
+          <a href="https://viiu.studio/portafolio" class="<?php echo nav_classes('portafolio.php', $current_page); ?>">Portafolio</a>
         </li>
         <li>
-          <a href="contacto.php" class="<?php echo nav_classes('contacto.php', $current_page); ?>">Contacto</a>
+          <a href="https://viiu.studio/contacto" class="<?php echo nav_classes('contacto.php', $current_page); ?>">Contacto</a>
         </li>
       </ul>
     </div>
