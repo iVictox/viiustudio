@@ -1,61 +1,49 @@
 <?php
-// admin/auth.php - MODO DIAGNÓSTICO
+// 1. ACTIVAR REPORTE DE ERRORES TEMPORALMENTE
+// Esto te permitirá ver si el fallo es de la base de datos en lugar de una pantalla blanca.
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 session_start();
 
-echo "<h1>Diagnóstico de Login</h1>";
-
-// 1. Verificar datos recibidos
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die("❌ Error: Debes enviar el formulario desde login.php, no abrir este archivo directo.");
+// 2. CONTROLAR ERROR DE CONEXIÓN
+try {
+    require 'config/db.php';
+} catch (Exception $e) {
+    // Si falla la conexión, mostramos el error en vez de pantalla blanca
+    die("Error Critical de Base de Datos: " . $e->getMessage());
 }
 
-$user_input = $_POST['username'] ?? 'VACIO';
-$pass_input = $_POST['password'] ?? 'VACIO';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Limpieza básica de datos
+    $username = isset($_POST['username']) ? trim($_POST['username']) : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-echo "1. Datos recibidos: Usuario = [" . htmlspecialchars($user_input) . "] / Pass = [" . htmlspecialchars($pass_input) . "]<br>";
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM admin_users WHERE username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
 
-// 2. Probar conexión
-require 'config/db.php';
-if ($pdo) {
-    echo "2. Conexión a Base de Datos: ✅ EXITOSA<br>";
-} else {
-    die("2. Conexión a Base de Datos: ❌ FALLÓ");
-}
-
-// 3. Buscar usuario
-$stmt = $pdo->prepare("SELECT * FROM admin_users WHERE username = ?");
-$stmt->execute([$user_input]);
-$usuario_db = $stmt->fetch();
-
-if (!$usuario_db) {
-    echo "3. Búsqueda de usuario: ❌ NO ENCONTRADO en la tabla 'admin_users'.<br>";
-    echo "👉 <strong>Solución:</strong> Ejecuta /admin/crear_admin.php en tu navegador.";
-    exit;
-} else {
-    echo "3. Búsqueda de usuario: ✅ Usuario encontrado (ID: " . $usuario_db['id'] . ")<br>";
-}
-
-// 4. Verificar contraseña
-if (password_verify($pass_input, $usuario_db['password'])) {
-    echo "4. Verificación de contraseña: ✅ CORRECTA<br>";
-    
-    // Prueba de sesión
-    $_SESSION['test_session'] = 'funciona';
-    if(isset($_SESSION['test_session'])) {
-        echo "5. Sistema de Sesiones: ✅ FUNCIONANDO<br>";
-        echo "<br><strong>¡TODO ESTÁ BIEN!</strong><br>";
-        echo "Si ves esto, el problema era solo la redirección o la contraseña incorrecta.<br>";
-        echo "<a href='index.php'>Haz clic aquí para entrar al Panel manualmente</a>";
-    } else {
-        echo "5. Sistema de Sesiones: ❌ FALLANDO (El servidor no guarda las sesiones)";
+        if ($user && password_verify($password, $user['password'])) {
+            // Login Exitoso
+            $_SESSION['admin_id'] = $user['id'];
+            $_SESSION['admin_user'] = $user['username'];
+            
+            // Redirección correcta
+            header('Location: index.php');
+            exit; // [IMPORTANTE] Detener el script aquí
+        } else {
+            // Credenciales incorrectas
+            header('Location: login.php?error=1');
+            exit; // [IMPORTANTE] Detener el script aquí
+        }
+    } catch (PDOException $e) {
+        die("Error en la consulta SQL: " . $e->getMessage());
     }
-    
 } else {
-    echo "4. Verificación de contraseña: ❌ INCORRECTA<br>";
-    echo "Hash en DB: " . substr($usuario_db['password'], 0, 10) . "...<br>";
-    echo "👉 Revisa mayúsculas/minúsculas o espacios extra.";
+    // Si alguien intenta entrar a auth.php sin enviar el formulario (GET), devolverlo al login
+    header('Location: login.php');
+    exit;
 }
 ?>
