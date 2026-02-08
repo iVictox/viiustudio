@@ -1,5 +1,5 @@
 <?php
-// servicios.php - Viiu Studio (Animado & Estandarizado)
+// servicios.php - Viiu Studio (Versión Final con Animaciones AOS)
 require_once 'admin/config/db.php'; 
 
 $pageTitle = "Planes y Precios | Viiu Studio";
@@ -50,20 +50,22 @@ try {
     <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
 
-    <div class="max-w-screen-xl mx-auto px-4 relative z-10 text-center reveal">
-        <span class="inline-block py-1 px-3 rounded-full bg-blue-900/50 border border-blue-700 text-blue-300 text-xs font-bold uppercase tracking-widest mb-4">
+    <div class="max-w-screen-xl mx-auto px-4 relative z-10 text-center">
+        <span data-aos="fade-down" data-aos-delay="100" class="inline-block py-1 px-3 rounded-full bg-blue-900/50 border border-blue-700 text-blue-300 text-xs font-bold uppercase tracking-widest mb-4">
             Precios Transparentes
         </span>
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+        
+        <h1 data-aos="fade-up" data-aos-delay="200" class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
             Invierte en tecnología,<br>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">no en problemas.</span>
         </h1>
-        <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+        
+        <p data-aos="fade-up" data-aos-delay="300" class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
             Sin letras pequeñas. Elige el plan que se adapte a tu etapa de crecimiento. 
             Escala cuando lo necesites.
         </p>
         
-        <div class="flex flex-wrap justify-center gap-3">
+        <div data-aos="fade-up" data-aos-delay="400" class="flex flex-wrap justify-center gap-3">
             <a href="#web" class="px-5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 hover:border-blue-500 hover:text-blue-400 transition-all text-sm font-bold flex items-center gap-2">
                 <i class="fas fa-laptop-code"></i> Web
             </a>
@@ -89,7 +91,7 @@ foreach ($categorias_planes as $key => $categoria):
 <section id="<?php echo $key; ?>" class="py-24 <?php echo $bgClass; ?> relative scroll-mt-20">
     <div class="max-w-screen-xl mx-auto px-4">
         
-        <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
             <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 text-blue-600 mb-4 text-xl">
                 <i class="fas <?php echo $categoria['icono']; ?>"></i>
             </div>
@@ -98,16 +100,22 @@ foreach ($categorias_planes as $key => $categoria):
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-            <?php foreach ($categoria['planes'] as $plan): 
+            <?php 
+            $delay = 0; // Reiniciar delay para cada categoría
+            foreach ($categoria['planes'] as $plan): 
                 $esDestacado = $plan['destacado'] ?? 0;
                 $setupFee = floatval($plan['setup_fee'] ?? 0);
                 $descuento = intval($plan['descuento_anual'] ?? 0);
                 $precio = floatval($plan['precio'] ?? 0);
                 $precio_entero = floor($precio);
                 $precio_decimal = sprintf("%02d", ($precio - $precio_entero) * 100);
+                
+                // Incremento de delay para efecto cascada (0, 100, 200...)
+                $delay += 100;
             ?>
             
-            <div class="group relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full overflow-hidden border reveal
+            <div data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>" 
+                 class="group relative bg-white rounded-2xl transition-all duration-300 flex flex-col h-full overflow-hidden border
                 <?php echo $esDestacado 
                     ? 'border-blue-600 shadow-2xl scale-105 z-10 ring-4 ring-blue-600/10' 
                     : 'border-slate-200 shadow-lg hover:shadow-xl hover:border-blue-300'; ?>">
@@ -185,12 +193,13 @@ foreach ($categorias_planes as $key => $categoria):
 </section>
 <?php endforeach; ?>
 
-<section id="amedida" class="py-24 bg-slate-900 text-white relative scroll-mt-20">
+<section id="amedida" class="py-24 bg-slate-900 text-white relative scroll-mt-20 overflow-hidden">
     <div class="absolute inset-0 bg-blue-600/5"></div>
+    
     <div class="max-w-screen-xl mx-auto px-4 relative z-10">
-        
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
+            
+            <div data-aos="fade-right">
                 <span class="text-orange-400 font-bold text-xs uppercase tracking-widest mb-2 block">Enterprise & Startups</span>
                 <h2 class="text-4xl md:text-5xl font-extrabold mb-6">¿Necesitas una solución <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">A Medida?</span></h2>
                 <p class="text-slate-400 text-lg mb-8 leading-relaxed">
@@ -198,14 +207,14 @@ foreach ($categorias_planes as $key => $categoria):
                 </p>
                 
                 <div class="space-y-4 mb-8">
-                    <div class="flex items-center">
+                    <div class="flex items-center" data-aos="fade-up" data-aos-delay="100">
                         <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-orange-400 mr-4"><i class="fas fa-brain"></i></div>
                         <div>
                             <h4 class="font-bold">Inteligencia Artificial</h4>
                             <p class="text-sm text-slate-500">Modelos de lenguaje, visión por computador y análisis predictivo.</p>
                         </div>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-blue-400 mr-4"><i class="fas fa-layer-group"></i></div>
                         <div>
                             <h4 class="font-bold">Plataformas SaaS</h4>
@@ -215,7 +224,7 @@ foreach ($categorias_planes as $key => $categoria):
                 </div>
             </div>
 
-            <div class="reveal bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 lg:p-10 shadow-2xl relative">
+            <div data-aos="fade-left" class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 lg:p-10 shadow-2xl relative">
                 <div class="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">PERSONALIZADO</div>
                 
                 <h3 class="text-2xl font-bold mb-2">Plan Corporativo / Custom</h3>
@@ -255,4 +264,4 @@ foreach ($categorias_planes as $key => $categoria):
     </div>
 </section>
 
-<?php include 'components/footer.php'; ?>
+<?php include_once 'components/footer.php'; ?>
