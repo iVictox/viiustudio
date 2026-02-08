@@ -14,14 +14,14 @@ include 'components/header.php';
         <div data-aos="fade-down"
             class="inline-flex items-center gap-x-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-sm font-medium text-[#0040A8] mb-8">
             <span class="flex h-2 w-2 rounded-full bg-[#0040A8] animate-pulse"></span>
-            Agencia de Desarrollo 
+            Agencia de Desarrollo & Software
         </div>
 
         <h1 data-aos="fade-up" data-aos-delay="100"
             class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
             Tu Departamento de Tecnología, <br class="hidden md:block">
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#0040A8] to-blue-500">sin
-                complicaciones.</span>
+                a.</span>
         </h1>
 
         <p data-aos="fade-up" data-aos-delay="200"
