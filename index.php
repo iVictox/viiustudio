@@ -16,7 +16,7 @@ include 'components/header.php';
             <div data-aos="fade-right" class="text-center lg:text-left">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm font-mono mb-8">
                     <span class="w-2 h-2 bg-blue-400 rounded-full animate-ping"></span>
-                    Viiu Studio v2.0 -> Online
+                    Viiu Studio v1.0 -> Online
                 </div>
 
                 <h1 class="text-5xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-tight">

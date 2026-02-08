@@ -1,17 +1,71 @@
 <?php
-// servicios.php - Rediseño Tech Premium
+// servicios.php - Conectado a Base de Datos
+require 'admin/config/db.php'; // Conexión a BD
+
 $pageTitle = "Soluciones y Precios";
 include 'components/header.php';
+
+// 1. Estructura Base de Categorías (Títulos y Descripciones se mantienen estáticos)
+$categorias_planes = [
+    'web' => [
+        'titulo_seccion' => 'Desarrollo & Presencia Web',
+        'descripcion_seccion' => 'Para negocios que necesitan visibilidad, posicionamiento y una imagen profesional impecable.',
+        'planes' => [] 
+    ],
+    'sistemas' => [
+        'titulo_seccion' => 'Sistemas Administrativos (SaaS)',
+        'descripcion_seccion' => 'Software a medida para gestionar tu empresa. Deja el Excel y pásate a la nube.',
+        'planes' => []
+    ],
+    'automatizacion' => [
+        'titulo_seccion' => 'Automatización de Procesos',
+        'descripcion_seccion' => 'Conectamos tus aplicaciones para que trabajen solas. Ahorra tiempo y elimina errores humanos.',
+        'planes' => []
+    ]
+];
+
+// 2. Obtener Planes Activos desde MySQL
+try {
+    $stmt = $pdo->query("SELECT * FROM plans WHERE activo = 1 ORDER BY precio ASC");
+    $planes_db = $stmt->fetchAll();
+
+    // 3. Organizar los planes en sus categorías
+    foreach ($planes_db as $plan) {
+        $cat = $plan['categoria'];
+        
+        // Decodificar las features de JSON a Array PHP para poder usarlas en el HTML
+        $plan['features'] = json_decode($plan['features'], true);
+        
+        // Si la categoría existe en nuestro array base, agregamos el plan
+        if (isset($categorias_planes[$cat])) {
+            $categorias_planes[$cat]['planes'][] = $plan;
+        }
+    }
+} catch (PDOException $e) {
+    // En caso de error, array vacío para no romper la página
+    error_log("Error DB: " . $e->getMessage());
+}
+
+// Datos visuales para ejemplos de automatización (Se mantienen estáticos por ahora)
+$ejemplos_auto = [
+    [
+        'titulo' => 'Ventas Automáticas',
+        'icono' => 'fa-robot',
+        'texto' => 'El cliente pregunta precio en Instagram > El bot responde y envía catálogo > Cliente compra > Se registra la venta en Excel y se avisa al almacén.'
+    ],
+    [
+        'titulo' => 'Gestión de Citas',
+        'icono' => 'fa-calendar-check',
+        'texto' => 'Cliente agenda en la web > Se bloquea el espacio en Google Calendar > Se envía confirmación por WhatsApp y recordatorio 1 hora antes.'
+    ]
+];
 ?>
 
 <section class="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900 text-white">
-    
     <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0h-2.828zM43.314 0L47.97 4.657l-1.414 1.414L40.486 0h2.828zM16.686 0L12.03 4.657 13.443 6.07 19.1 6.07 25.172 0h-2.83zM32 0l.83.828-1.415 1.415L30 0h2zM28 0l-.83.828L28.585 2.243 30 0h-2z\' fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'/%3E%3C/svg%3E');"></div>
-    
     <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
 
     <div class="max-w-screen-xl mx-auto px-4 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-        
         <div data-aos="fade-right">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-300 text-xs font-mono mb-6">
                 <i class="fas fa-terminal text-[10px]"></i> system_status: active
@@ -24,7 +78,6 @@ include 'components/header.php';
                 Elige el stack tecnológico que tu empresa necesita. Desde presencia web básica hasta ecosistemas de automatización complejos.
             </p>
         </div>
-
         <div data-aos="fade-left" class="hidden lg:block relative">
             <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl blur opacity-20"></div>
             <div class="bg-[#0f172a] rounded-xl border border-slate-700 p-6 font-mono text-sm shadow-2xl relative">
@@ -70,9 +123,11 @@ include 'components/header.php';
 <?php 
 // Recorremos las categorías
 foreach ($categorias_planes as $key => $categoria): 
-    // Alternamos estilos sutiles para diferenciar secciones
     $isDarker = ($key === 'sistemas'); 
     $sectionBg = $isDarker ? 'bg-slate-50' : 'bg-white';
+    
+    // Si la categoría no tiene planes, la saltamos (opcional)
+    if(empty($categoria['planes'])) continue;
 ?>
 
 <section id="<?php echo $key; ?>" class="py-24 <?php echo $sectionBg; ?> relative">
@@ -116,24 +171,31 @@ foreach ($categorias_planes as $key => $categoria):
                 <?php endif; ?>
 
                 <div class="p-8 flex-1">
-                    <h3 class="text-xl font-bold text-slate-900 mb-2"><?php echo $plan['titulo']; ?></h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2"><?php echo htmlspecialchars($plan['titulo']); ?></h3>
                     
                     <div class="my-6 flex items-baseline">
-                        <span class="text-4xl font-extrabold tracking-tight text-slate-900">$<?php echo $plan['precio']; ?></span>
+                        <span class="text-4xl font-extrabold tracking-tight text-slate-900">$<?php echo htmlspecialchars($plan['precio']); ?></span>
                         <span class="ml-2 text-slate-400 text-sm font-medium">/mes</span>
                     </div>
 
                     <div class="h-px w-full bg-slate-100 mb-6 group-hover:bg-blue-50 transition-colors"></div>
 
                     <ul class="space-y-4">
-                        <?php foreach($plan['features'] as $feature): ?>
+                        <?php 
+                        // Verificamos que 'features' sea un array válido antes de recorrerlo
+                        if(is_array($plan['features'])):
+                            foreach($plan['features'] as $feature): 
+                        ?>
                         <li class="flex items-start">
                             <div class="flex-shrink-0 w-5 h-5 rounded-full bg-blue-50 text-[#0040A8] flex items-center justify-center mt-0.5 group-hover:bg-[#0040A8] group-hover:text-white transition-colors">
                                 <i class="fas fa-check text-[10px]"></i>
                             </div>
-                            <span class="ml-3 text-slate-600 text-sm group-hover:text-slate-800 transition-colors"><?php echo $feature; ?></span>
+                            <span class="ml-3 text-slate-600 text-sm group-hover:text-slate-800 transition-colors"><?php echo htmlspecialchars($feature); ?></span>
                         </li>
-                        <?php endforeach; ?>
+                        <?php 
+                            endforeach; 
+                        endif;
+                        ?>
                     </ul>
                 </div>
 
