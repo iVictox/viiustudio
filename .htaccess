@@ -2,8 +2,8 @@ RewriteEngine On
 
 # 1. Forzar HTTPS (Opcional, pero recomendado ya que arreglaste el SSL)
 # Si alguien entra por http, lo manda a https
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # 2. Quitar la extensión .php de la URL (Redirección externa)
 # Si alguien escribe "contacto.php", el navegador cambia a "contacto"
