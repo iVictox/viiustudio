@@ -1,89 +1,168 @@
 <?php
-$pageTitle = "Nuestros Proyectos";
+// portafolio.php - Diseño Tech Showcase
+$pageTitle = "Nuestro Trabajo";
 include 'components/header.php';
 
-// Datos simulados de proyectos (Puedes editarlos aquí mismo)
+// DATOS DE PROYECTOS (Actualizados con Stack Tecnológico)
 $proyectos = [
     [
-        'titulo' => 'Portal Corporativo "Innova"',
+        'titulo' => 'E-Commerce "Urban Style"',
         'categoria' => 'web',
-        'descripcion' => 'Diseño web corporativo para firma de abogados, con blog autoadministrable.',
-        'img' => 'https://placehold.co/800x600/0040A8/FFFFFF?text=Web+Corporativa' 
+        'cliente' => 'Retail Fashion',
+        'descripcion' => 'Tienda online progresiva (PWA) con sincronización de inventario en tiempo real y pasarela de pagos multicomoneda.',
+        'stack' => ['React', 'Node.js', 'Stripe API'],
+        'img' => 'https://placehold.co/800x600/0f172a/FFFFFF?text=E-Commerce+Pro' 
     ],
     [
-        'titulo' => 'Sistema de Nómina "Visual"',
+        'titulo' => 'Bot de Agendamiento Médico',
+        'categoria' => 'automatizacion',
+        'cliente' => 'Clínica Salud',
+        'descripcion' => 'Asistente virtual en WhatsApp que gestiona citas, reprograma pacientes y envía recordatorios automáticos.',
+        'stack' => ['Python', 'WhatsApp Business API', 'Google Calendar'],
+        'img' => 'https://placehold.co/800x600/0040A8/FFFFFF?text=Bot+WhatsApp'
+    ],
+    [
+        'titulo' => 'ERP de Logística "TrackFast"',
         'categoria' => 'sistemas',
-        'descripcion' => 'Plataforma interna para gestión de pagos, empleados y deducciones legales (IVSS/FAOV).',
-        'img' => 'https://placehold.co/800x600/1e293b/FFFFFF?text=Sistema+Nomina'
+        'cliente' => 'Transporte Logístico',
+        'descripcion' => 'Sistema administrativo para control de flota, guías de despacho y rastreo satelital integrado.',
+        'stack' => ['Laravel', 'Vue.js', 'MySQL', 'Google Maps API'],
+        'img' => 'https://placehold.co/800x600/1e293b/FFFFFF?text=SaaS+Logistica'
     ],
     [
-        'titulo' => 'E-commerce "Moda Vzla"',
+        'titulo' => 'Landing Page "Evento Tech"',
         'categoria' => 'web',
-        'descripcion' => 'Tienda en línea con pasarela de pago y gestión de inventario en tiempo real.',
-        'img' => 'https://placehold.co/800x600/e2e8f0/0040A8?text=E-Commerce'
+        'cliente' => 'Eventos Corp',
+        'descripcion' => 'Página de alto rendimiento con animaciones 3D y sistema de registro QR para asistentes.',
+        'stack' => ['HTML5', 'TailwindCSS', 'Three.js'],
+        'img' => 'https://placehold.co/800x600/f8fafc/0040A8?text=Landing+Page'
     ],
     [
-        'titulo' => 'App de Delivery "Rápido"',
-        'categoria' => 'app',
-        'descripcion' => 'Interfaz de usuario para aplicación móvil de logística y entregas.',
-        'img' => 'https://placehold.co/800x600/0040A8/FFFFFF?text=App+Mobile'
+        'titulo' => 'Automatización de Facturación',
+        'categoria' => 'automatizacion',
+        'cliente' => 'Consultora Legal',
+        'descripcion' => 'Sistema que detecta nuevos pagos en banco, genera la factura fiscal y la envía al cliente por email.',
+        'stack' => ['N8N', 'Gmail API', 'Bank Webhooks'],
+        'img' => 'https://placehold.co/800x600/059669/FFFFFF?text=Auto+Invoicing'
     ],
     [
-        'titulo' => 'Dashboard Financiero',
+        'titulo' => 'CRM Inmobiliario',
         'categoria' => 'sistemas',
-        'descripcion' => 'Panel de control administrativo con gráficas y reportes exportables a PDF/Excel.',
-        'img' => 'https://placehold.co/800x600/334155/FFFFFF?text=Dashboard'
-    ],
-    [
-        'titulo' => 'Landing Page "Evento 2026"',
-        'categoria' => 'web',
-        'descripcion' => 'Página de aterrizaje de alta conversión para registro de eventos.',
-        'img' => 'https://placehold.co/800x600/f1f5f9/0040A8?text=Landing+Page'
+        'cliente' => 'Bienes Raíces',
+        'descripcion' => 'Plataforma personalizada para gestión de propiedades, clientes potenciales y cálculo de comisiones.',
+        'stack' => ['PHP 8', 'Livewire', 'PostgreSQL'],
+        'img' => 'https://placehold.co/800x600/334155/FFFFFF?text=CRM+Custom'
     ]
 ];
 ?>
 
-<section class="bg-slate-900 text-white py-20 text-center">
-    <div class="max-w-screen-xl mx-auto px-4">
-        <h1 class="text-4xl font-bold mb-4" data-aos="fade-up">Portafolio de Trabajo</h1>
-        <p class="text-slate-400 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-            Una muestra de cómo transformamos ideas en código limpio y funcional.
+<section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900 text-white">
+    
+    <div class="absolute inset-0 opacity-[0.05] font-mono text-xs leading-4 overflow-hidden select-none pointer-events-none text-blue-500">
+        <?php for($i=0; $i<4000; $i++) echo rand(0,1) . " "; ?>
+    </div>
+    
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[#0040A8] opacity-20 blur-[120px]"></div>
+
+    <div class="max-w-screen-xl mx-auto px-4 relative z-10 text-center">
+        <div data-aos="fade-down" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/50 border border-blue-500/30 text-blue-300 text-xs font-mono mb-6 backdrop-blur-md">
+            <i class="fas fa-folder-open"></i> /var/www/portfolio
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6" data-aos="fade-up">
+            Menos palabras, <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">más código.</span>
+        </h1>
+        
+        <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+            Explora cómo hemos transformado problemas complejos en soluciones digitales elegantes. Desde algoritmos de automatización hasta interfaces web inmersivas.
         </p>
     </div>
 </section>
 
-<section class="py-16 bg-white min-h-screen">
+<section class="py-20 bg-slate-50 min-h-screen">
     <div class="max-w-screen-xl mx-auto px-4">
         
-        <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up">
-            <button class="filter-btn active px-6 py-2 rounded-full border border-slate-200 text-slate-600 hover:border-[#0040A8] hover:text-[#0040A8] transition-all font-medium" data-filter="all">Todos</button>
-            <button class="filter-btn px-6 py-2 rounded-full border border-slate-200 text-slate-600 hover:border-[#0040A8] hover:text-[#0040A8] transition-all font-medium" data-filter="web">Páginas Web</button>
-            <button class="filter-btn px-6 py-2 rounded-full border border-slate-200 text-slate-600 hover:border-[#0040A8] hover:text-[#0040A8] transition-all font-medium" data-filter="sistemas">Sistemas / Apps</button>
+        <div class="flex flex-wrap justify-center gap-4 mb-16" data-aos="fade-up">
+            <button class="filter-btn active group relative px-6 py-2.5 rounded-lg text-sm font-bold transition-all bg-[#0040A8] text-white shadow-lg shadow-blue-900/20" data-filter="all">
+                <i class="fas fa-layer-group mr-2"></i> Todos
+            </button>
+            
+            <button class="filter-btn group relative px-6 py-2.5 rounded-lg text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-[#0040A8] hover:text-[#0040A8]" data-filter="web">
+                <i class="fas fa-globe mr-2"></i> Web Dev
+            </button>
+
+            <button class="filter-btn group relative px-6 py-2.5 rounded-lg text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-[#0040A8] hover:text-[#0040A8]" data-filter="sistemas">
+                <i class="fas fa-database mr-2"></i> Sistemas SaaS
+            </button>
+
+            <button class="filter-btn group relative px-6 py-2.5 rounded-lg text-sm font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-[#0040A8] hover:text-[#0040A8]" data-filter="automatizacion">
+                <i class="fas fa-robot mr-2"></i> Automatización
+            </button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php foreach($proyectos as $index => $proyecto): ?>
-                <div class="group project-item relative overflow-hidden rounded-xl shadow-lg cursor-pointer" 
+                
+                <div class="project-item group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col" 
                      data-categoria="<?php echo $proyecto['categoria']; ?>"
-                     data-aos="fade-up" data-aos-delay="<?php echo $index * 100; ?>">
+                     data-aos="fade-up" 
+                     data-aos-delay="<?php echo $index * 50; ?>">
                     
-                    <div class="overflow-hidden h-64">
-                        <img src="<?php echo $proyecto['img']; ?>" alt="<?php echo $proyecto['titulo']; ?>" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="relative h-60 overflow-hidden bg-slate-900">
+                        <img src="<?php echo $proyecto['img']; ?>" alt="<?php echo $proyecto['titulo']; ?>" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100">
+                        
+                        <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full border border-white/10 uppercase tracking-wide">
+                            <?php echo $proyecto['categoria']; ?>
+                        </div>
+
+                        <div class="absolute inset-0 bg-[#0040A8]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                            <span class="text-white font-bold text-lg mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Stack Tecnológico</span>
+                            <div class="flex flex-wrap gap-2 justify-center translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                                <?php foreach($proyecto['stack'] as $tech): ?>
+                                    <span class="bg-white/20 text-white px-2 py-1 rounded text-xs font-mono"><?php echo $tech; ?></span>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="absolute inset-0 bg-[#0040A8]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center text-white">
-                        <h3 class="text-xl font-bold mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300"><?php echo $proyecto['titulo']; ?></h3>
-                        <p class="text-sm text-blue-100 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75"><?php echo $proyecto['descripcion']; ?></p>
-                        <span class="inline-block border border-white px-4 py-1 rounded-full text-xs uppercase tracking-wider translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">Ver Detalles</span>
-                    </div>
-                    
-                    <div class="absolute bottom-0 left-0 w-full bg-white p-4 md:hidden">
-                        <h3 class="font-bold text-slate-800"><?php echo $proyecto['titulo']; ?></h3>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-slate-900 mb-1 group-hover:text-[#0040A8] transition-colors"><?php echo $proyecto['titulo']; ?></h3>
+                            <p class="text-xs text-slate-400 font-mono uppercase tracking-wide">Cliente: <?php echo $proyecto['cliente']; ?></p>
+                        </div>
+                        
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-1">
+                            <?php echo $proyecto['descripcion']; ?>
+                        </p>
+
+                        <div class="pt-6 border-t border-slate-100 flex justify-between items-center">
+                            <div class="flex -space-x-2 overflow-hidden">
+                                <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-slate-200"></div>
+                                <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-slate-300"></div>
+                            </div>
+                            <span class="text-[#0040A8] text-xs font-bold cursor-pointer group-hover:underline">
+                                Ver Detalles <i class="fas fa-arrow-right ml-1"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
+
             <?php endforeach; ?>
         </div>
 
+    </div>
+</section>
+
+<section class="py-20 bg-white border-t border-slate-100">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-slate-900 mb-6">¿Tienes una idea similar?</h2>
+        <p class="text-slate-500 mb-8">
+            Ya sea una web corporativa o una automatización compleja, tenemos el stack y la experiencia para construirlo.
+        </p>
+        <a href="https://wa.me/584127703302" class="inline-flex items-center justify-center px-8 py-4 bg-[#0040A8] text-white font-bold rounded-xl hover:bg-[#003080] transition-all shadow-lg shadow-blue-900/20 transform hover:-translate-y-1">
+            <i class="fab fa-whatsapp mr-2"></i> Cotizar Mi Proyecto
+        </a>
     </div>
 </section>
 
@@ -94,29 +173,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filters.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remover clase activa
-            filters.forEach(f => f.classList.remove('bg-[#0040A8]', 'text-white', 'border-transparent'));
-            filters.forEach(f => f.classList.add('text-slate-600', 'border-slate-200'));
+            // Reset styles
+            filters.forEach(f => {
+                f.classList.remove('bg-[#0040A8]', 'text-white', 'shadow-lg');
+                f.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+            });
             
-            // Activar botón actual
-            btn.classList.remove('text-slate-600', 'border-slate-200');
-            btn.classList.add('bg-[#0040A8]', 'text-white', 'border-transparent');
+            // Active style
+            btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+            btn.classList.add('bg-[#0040A8]', 'text-white', 'shadow-lg');
 
             const filterValue = btn.getAttribute('data-filter');
 
             items.forEach(item => {
                 if(filterValue === 'all' || item.getAttribute('data-categoria') === filterValue) {
-                    item.style.display = 'block';
-                    // Re-trigger animación (opcional, simple display block funciona bien)
+                    item.classList.remove('hidden');
+                    // Pequeña animación de entrada
+                    item.classList.add('fade-in-up');
+                    setTimeout(() => item.classList.remove('fade-in-up'), 500);
                 } else {
-                    item.style.display = 'none';
+                    item.classList.add('hidden');
                 }
             });
         });
     });
-    
-    // Activar el primero por defecto visualmente
-    document.querySelector('.filter-btn[data-filter="all"]').click();
 });
 </script>
 

@@ -1,145 +1,196 @@
 <?php
-$pageTitle = "Planes y Servicios";
+// servicios.php - Rediseño Tech Premium
+$pageTitle = "Soluciones y Precios";
 include 'components/header.php';
 ?>
 
-<section class="bg-[#0040A8] text-white py-20 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+<section class="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900 text-white">
     
-    <div class="max-w-screen-xl mx-auto px-4 text-center relative z-10">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6" data-aos="fade-up">Elige tu tranquilidad tecnológica</h1>
-        <p class="text-xl text-blue-100 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-            Planes mensuales transparentes. Sin sorpresas. Todo incluido: desarrollo, servidores, dominios y soporte.
-        </p>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0h-2.828zM43.314 0L47.97 4.657l-1.414 1.414L40.486 0h2.828zM16.686 0L12.03 4.657 13.443 6.07 19.1 6.07 25.172 0h-2.83zM32 0l.83.828-1.415 1.415L30 0h2zM28 0l-.83.828L28.585 2.243 30 0h-2z\' fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'/%3E%3C/svg%3E');"></div>
+    
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+
+    <div class="max-w-screen-xl mx-auto px-4 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+        
+        <div data-aos="fade-right">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-300 text-xs font-mono mb-6">
+                <i class="fas fa-terminal text-[10px]"></i> system_status: active
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Arquitectura de <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Soluciones.</span>
+            </h1>
+            <p class="text-lg text-slate-400 mb-8 max-w-lg leading-relaxed">
+                Elige el stack tecnológico que tu empresa necesita. Desde presencia web básica hasta ecosistemas de automatización complejos.
+            </p>
+        </div>
+
+        <div data-aos="fade-left" class="hidden lg:block relative">
+            <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl blur opacity-20"></div>
+            <div class="bg-[#0f172a] rounded-xl border border-slate-700 p-6 font-mono text-sm shadow-2xl relative">
+                <div class="flex gap-2 mb-4">
+                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                </div>
+                <div class="text-slate-300">
+                    <span class="text-purple-400">const</span> <span class="text-blue-400">selectedPlan</span> = {<br>
+                    &nbsp;&nbsp;<span class="text-sky-300">type</span>: <span class="text-green-300">"SaaS & Automation"</span>,<br>
+                    &nbsp;&nbsp;<span class="text-sky-300">scalability</span>: <span class="text-orange-400">true</span>,<br>
+                    &nbsp;&nbsp;<span class="text-sky-300">support</span>: <span class="text-green-300">"24/7 Priority"</span>,<br>
+                    &nbsp;&nbsp;<span class="text-sky-300">modules</span>: [<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"CRM_Integration"</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"Auto_Invoicing"</span><br>
+                    &nbsp;&nbsp;]<br>
+                    };<br><br>
+                    <span class="text-slate-500">// Ready to deploy...</span><br>
+                    <span class="animate-pulse text-blue-400">█</span>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="py-20 bg-slate-50">
-    <div class="max-w-screen-xl mx-auto px-4">
+<div class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 overflow-x-auto no-scrollbar">
+        <div class="flex space-x-8 md:justify-center py-4 min-w-max">
+            <a href="#web" class="flex items-center gap-2 text-slate-500 hover:text-[#0040A8] font-medium transition-colors group">
+                <i class="fas fa-globe text-slate-400 group-hover:text-[#0040A8]"></i> Web Development
+            </a>
+            <a href="#sistemas" class="flex items-center gap-2 text-slate-500 hover:text-[#0040A8] font-medium transition-colors group">
+                <i class="fas fa-server text-slate-400 group-hover:text-[#0040A8]"></i> Sistemas (SaaS)
+            </a>
+            <a href="#automatizacion" class="flex items-center gap-2 text-slate-500 hover:text-[#0040A8] font-medium transition-colors group">
+                <i class="fas fa-bolt text-slate-400 group-hover:text-[#0040A8]"></i> Automatización
+            </a>
+        </div>
+    </div>
+</div>
+
+<?php 
+// Recorremos las categorías
+foreach ($categorias_planes as $key => $categoria): 
+    // Alternamos estilos sutiles para diferenciar secciones
+    $isDarker = ($key === 'sistemas'); 
+    $sectionBg = $isDarker ? 'bg-slate-50' : 'bg-white';
+?>
+
+<section id="<?php echo $key; ?>" class="py-24 <?php echo $sectionBg; ?> relative">
+    
+    <?php if($key === 'web'): ?>
+        <i class="fab fa-html5 absolute top-20 right-10 text-9xl text-orange-500 opacity-5 -rotate-12"></i>
+    <?php elseif($key === 'sistemas'): ?>
+        <i class="fas fa-database absolute bottom-20 left-10 text-9xl text-blue-500 opacity-5 rotate-12"></i>
+    <?php elseif($key === 'automatizacion'): ?>
+        <i class="fas fa-network-wired absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] text-[#0040A8] opacity-[0.03]"></i>
+    <?php endif; ?>
+
+    <div class="max-w-screen-xl mx-auto px-4 relative z-10">
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-            
-            <?php 
-            $delay = 0;
-            foreach ($planes as $key => $plan): 
-                $isRecommended = $plan['recomendado'];
-                $delay += 100;
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 border-b border-slate-200 pb-8" data-aos="fade-up">
+            <div class="max-w-2xl">
+                <span class="text-[#0040A8] font-mono text-xs uppercase tracking-widest mb-2 block">// Categoría: <?php echo $key; ?></span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-3"><?php echo $categoria['titulo_seccion']; ?></h2>
+                <p class="text-slate-500"><?php echo $categoria['descripcion_seccion']; ?></p>
+            </div>
+            <div class="hidden md:block">
+                <?php if($key == 'web'): ?> <i class="fas fa-laptop-code text-4xl text-slate-300"></i>
+                <?php elseif($key == 'sistemas'): ?> <i class="fas fa-cogs text-4xl text-slate-300"></i>
+                <?php else: ?> <i class="fas fa-robot text-4xl text-slate-300"></i>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+            <?php foreach ($categoria['planes'] as $index => $plan): 
+                $destacado = $plan['destacado'];
             ?>
-            
-            <div data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>" 
-                 class="relative flex flex-col p-8 bg-white rounded-2xl shadow-lg transition-transform hover:-translate-y-2 border border-slate-100 <?php echo $isRecommended ? 'ring-2 ring-[#0040A8] md:-mt-8 md:mb-8' : ''; ?>">
+            <div data-aos="fade-up" data-aos-delay="<?php echo $index * 100; ?>" 
+                 class="group relative bg-white rounded-2xl border transition-all duration-300 flex flex-col h-full
+                 <?php echo $destacado ? 'border-[#0040A8] shadow-2xl scale-105 z-10' : 'border-slate-100 shadow-lg hover:shadow-xl hover:border-blue-200'; ?>">
                 
-                <?php if($isRecommended): ?>
-                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#0040A8] text-white px-4 py-1 rounded-full text-sm font-bold tracking-wide uppercase shadow-md">
-                        Más Popular
+                <?php if($destacado): ?>
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#0040A8] text-white px-4 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-lg flex items-center gap-2">
+                        <i class="fas fa-star text-[10px]"></i> Recomendado
                     </div>
                 <?php endif; ?>
 
-                <div class="mb-6">
-                    <h3 class="text-2xl font-bold text-slate-800"><?php echo $plan['titulo']; ?></h3>
-                    <p class="text-slate-500 text-sm mt-2 h-10"><?php echo $plan['subtitulo']; ?></p>
+                <div class="p-8 flex-1">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2"><?php echo $plan['titulo']; ?></h3>
+                    
+                    <div class="my-6 flex items-baseline">
+                        <span class="text-4xl font-extrabold tracking-tight text-slate-900">$<?php echo $plan['precio']; ?></span>
+                        <span class="ml-2 text-slate-400 text-sm font-medium">/mes</span>
+                    </div>
+
+                    <div class="h-px w-full bg-slate-100 mb-6 group-hover:bg-blue-50 transition-colors"></div>
+
+                    <ul class="space-y-4">
+                        <?php foreach($plan['features'] as $feature): ?>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-5 h-5 rounded-full bg-blue-50 text-[#0040A8] flex items-center justify-center mt-0.5 group-hover:bg-[#0040A8] group-hover:text-white transition-colors">
+                                <i class="fas fa-check text-[10px]"></i>
+                            </div>
+                            <span class="ml-3 text-slate-600 text-sm group-hover:text-slate-800 transition-colors"><?php echo $feature; ?></span>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
 
-                <div class="mb-6 flex items-baseline text-slate-900">
-                    <?php if(is_numeric($plan['precio'])): ?>
-                        <span class="text-5xl font-extrabold tracking-tight">$<?php echo $plan['precio']; ?></span>
-                        <span class="ml-1 text-xl font-normal text-slate-500">/mes</span>
-                    <?php else: ?>
-                        <span class="text-4xl font-extrabold tracking-tight"><?php echo $plan['precio']; ?></span>
-                    <?php endif; ?>
+                <div class="p-8 pt-0 mt-auto">
+                    <a href="https://wa.me/584127703302?text=Hola,%20quiero%20empezar%20con%20el%20plan%20<?php echo urlencode($plan['titulo']); ?>" 
+                       target="_blank"
+                       class="w-full inline-flex justify-center items-center py-3.5 rounded-xl font-bold transition-all border
+                       <?php echo $destacado ? 
+                           'bg-[#0040A8] text-white hover:bg-[#003080] border-transparent shadow-lg shadow-blue-900/20' : 
+                           'bg-white text-slate-700 border-slate-200 hover:border-[#0040A8] hover:text-[#0040A8]'; ?>">
+                        Seleccionar Plan
+                    </a>
                 </div>
-
-                <ul class="mb-8 space-y-4 flex-1">
-                    <?php foreach($plan['features'] as $feature): ?>
-                    <li class="flex items-start">
-                        <div class="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mt-0.5">
-                            <i class="fas fa-check text-xs"></i>
-                        </div>
-                        <span class="ml-3 text-slate-600 text-sm"><?php echo $feature; ?></span>
-                    </li>
-                    <?php endforeach; ?>
-                </ul>
-
-                <a href="https://wa.me/584120000000?text=Hola,%20me%20interesa%20el%20plan%20<?php echo urlencode($plan['titulo']); ?>" 
-                   target="_blank"
-                   class="w-full block text-center py-3 px-6 rounded-lg font-bold transition-colors <?php echo $isRecommended ? 'bg-[#0040A8] text-white hover:bg-[#003080]' : 'bg-slate-100 text-[#0040A8] hover:bg-slate-200'; ?>">
-                    Elegir Plan
-                </a>
             </div>
-            
             <?php endforeach; ?>
-            
         </div>
-
-        <p class="text-center text-slate-400 text-sm mt-12 italic">
-            * Los precios pueden variar según la complejidad específica de requerimientos adicionales. Contáctanos para una cotización personalizada.
-        </p>
-
-    </div>
-</section>
-
-<section class="py-20 bg-white border-t border-slate-100">
-    <div class="max-w-screen-xl mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-slate-900">¿Cómo empezamos a trabajar?</h2>
-            <p class="text-slate-500 mt-4">Simple, directo y sin burocracia innecesaria.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center text-[#0040A8] text-2xl font-bold mb-6 group-hover:bg-[#0040A8] group-hover:text-white transition-colors duration-300">
-                    1
-                </div>
-                <h3 class="font-bold text-lg mb-2">Consulta Gratis</h3>
-                <p class="text-slate-500 text-sm">Hablamos por WhatsApp o llamada para entender qué necesita tu negocio.</p>
-            </div>
-
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center text-[#0040A8] text-2xl font-bold mb-6 group-hover:bg-[#0040A8] group-hover:text-white transition-colors duration-300">
-                    2
-                </div>
-                <h3 class="font-bold text-lg mb-2">Propuesta & Plan</h3>
-                <p class="text-slate-500 text-sm">Te recomendamos el plan ideal y definimos el alcance del proyecto.</p>
-            </div>
-
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center text-[#0040A8] text-2xl font-bold mb-6 group-hover:bg-[#0040A8] group-hover:text-white transition-colors duration-300">
-                    3
-                </div>
-                <h3 class="font-bold text-lg mb-2">Desarrollo Rápido</h3>
-                <p class="text-slate-500 text-sm">Creamos tu plataforma. Te mostramos avances y ajustamos detalles.</p>
-            </div>
-
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center text-[#0040A8] text-2xl font-bold mb-6 group-hover:bg-[#0040A8] group-hover:text-white transition-colors duration-300">
-                    4
-                </div>
-                <h3 class="font-bold text-lg mb-2">Lanzamiento</h3>
-                <p class="text-slate-500 text-sm">Publicamos tu web. A partir de aquí, nosotros nos encargamos de que siempre funcione.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-20 bg-slate-50">
-    <div class="max-w-screen-md mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
         
-        <div class="space-y-4">
-            <div class="bg-white rounded-lg p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                <h4 class="font-bold text-[#0040A8] mb-2">¿Qué incluye el mantenimiento mensual?</h4>
-                <p class="text-slate-600 text-sm">Incluye actualizaciones de seguridad, corrección de errores, cambios menores en textos o imágenes, copias de seguridad y monitoreo para asegurar que tu sitio esté siempre en línea.</p>
-            </div>
-            
-            <div class="bg-white rounded-lg p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                <h4 class="font-bold text-[#0040A8] mb-2">¿Puedo cancelar cuando quiera?</h4>
-                <p class="text-slate-600 text-sm">Sí. Trabajamos mes a mes. Si decides cancelar, te entregamos una copia de tu base de datos y contenido (según términos del contrato), aunque el código fuente de nuestra plataforma base sigue siendo propiedad de Viiu Studio.</p>
-            </div>
+    </div>
+</section>
+<?php endforeach; ?>
 
-             <div class="bg-white rounded-lg p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                <h4 class="font-bold text-[#0040A8] mb-2">¿Hacen sistemas complejos a medida?</h4>
-                <p class="text-slate-600 text-sm">¡Absolutamente! Es nuestra especialidad. Desde sistemas de nómina, control de inventarios hasta apps internas para empresas. Contáctanos para el Plan Pro.</p>
+<section class="py-24 bg-[#0a0e17] text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#0040A8 1px, transparent 1px); background-size: 30px 30px;"></div>
+    
+    <div class="max-w-screen-xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Workflow Intelligence</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">
+                No vendemos solo software. Diseñamos la lógica que permite a tu negocio operar sin ti.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <?php foreach($ejemplos_auto as $index => $ejemplo): ?>
+            <div class="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300" data-aos="fade-up" data-aos-delay="<?php echo $index * 100; ?>">
+                <div class="flex items-start gap-6">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-2xl shadow-lg shrink-0 group-hover:scale-110 transition-transform">
+                        <i class="fas <?php echo $ejemplo['icono']; ?>"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-3 text-white"><?php echo $ejemplo['titulo']; ?></h3>
+                        <div class="text-sm font-mono text-blue-200 bg-black/30 p-4 rounded-lg border border-white/5 leading-relaxed">
+                            <span class="text-green-400">INPUT:</span> <?php echo explode('>', $ejemplo['texto'])[0]; ?><br>
+                            <span class="text-yellow-400">PROCESS:</span> ... Ejecutando lógica ...<br>
+                            <span class="text-cyan-400">OUTPUT:</span> <?php echo substr($ejemplo['texto'], strpos($ejemplo['texto'], '>') + 1); ?>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <?php endforeach; ?>
+        </div>
+        
+        <div class="mt-16 text-center">
+            <a href="contacto.php" class="inline-flex items-center gap-3 text-slate-300 hover:text-white transition-colors border-b border-blue-500/50 pb-1 hover:border-blue-400">
+                <i class="fas fa-flask text-blue-500"></i>
+                Solicitar análisis de procesos gratuito
+            </a>
         </div>
     </div>
 </section>
