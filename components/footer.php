@@ -36,7 +36,7 @@
             </div>
 
             <div class="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-                <p>&copy; <?php echo date('Y'); ?> Viiu Studio. Todos los derechos reservados</p>
+                <p>&copy; <?php echo date('Y'); ?> Viiu Studio. Todos los derechos reservados.</p>
                 <div class="mt-4 md:mt-0">
                     <a href="#" class="hover:text-[#0040A8] mr-4">Privacidad</a>
                     <a href="#" class="hover:text-[#0040A8]">Términos</a>
