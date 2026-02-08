@@ -1,9 +1,9 @@
 <?php
 // admin/config/db.php
-$host = 'localhost';
+$host = '147.93.144.236';
 $db   = 'viiu_studio_db';
-$user = 'root'; // Cambia esto por tu usuario real
-$pass = '';     // Cambia esto por tu contraseña real
+$user = 'viiu_studio_usr'; 
+$pass = 'oIYzqt}Yv{1!ouv[';     
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
