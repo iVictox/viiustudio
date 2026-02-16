@@ -1,99 +1,87 @@
 <?php
-// admin/api/chat.php - VERSIÓN ROBUSTA CON CURL
+// admin/api/chat.php - VERSIÓN DEEPSEEK (Compatible OpenAI)
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 
-// 1. ACTIVAR REPORTES DE ERROR (Solo para depuración, quítalo en producción real)
+// Depuración (Desactivar en producción)
 ini_set('display_errors', 0); 
 error_reporting(E_ALL);
 
 // --- CONFIGURACIÓN ---
-// [IMPORTANTE] ¡ASEGÚRATE DE PEGAR TU API KEY AQUÍ!
-$apiKey = 'AIzaSyB0PNQj1cxZriuOCNBhlinShVgEumlbB3M'; 
+// [IMPORTANTE] PEGA AQUÍ TU API KEY DE DEEPSEEK (Empieza por 'sk-...')
+$apiKey = 'sk-3de297810444430d957ce63db58a08c0'; 
 
-// Verificar que la API Key no esté vacía
-if ($apiKey === 'TU_API_KEY_AQUI' || empty($apiKey)) {
-    echo json_encode(['reply' => 'Error de Configuración: Falta la API Key en chat.php']);
+if ($apiKey === 'TU_API_KEY_DEEPSEEK_AQUI' || empty($apiKey)) {
+    echo json_encode(['reply' => 'Error: Falta la API Key de DeepSeek.']);
     exit;
 }
 
-// Leer entrada
-$inputJSON = file_get_contents('php://input');
-$input = json_decode($inputJSON, true);
+$input = json_decode(file_get_contents('php://input'), true);
 $userMessage = $input['message'] ?? '';
 
 if (empty($userMessage)) {
-    echo json_encode(['reply' => 'El mensaje llegó vacío.']);
+    echo json_encode(['reply' => 'Mensaje vacío.']);
     exit;
 }
 
-// --- CONTEXTO DEL NEGOCIO ---
+// --- CEREBRO DEL BOT (System Prompt) ---
 $systemPrompt = "
-Eres 'ViiuBot', el asistente virtual de la agencia 'Viiu Studio'.
+Eres 'ViiuBot', vendedor experto de la agencia 'Viiu Studio'.
 Objetivo: Vender desarrollo web, sistemas y automatización.
-Estilo: Breve, profesional y persuasivo. Usa emojis.
+Estilo: Persuasivo, profesional, usa emojis. Respuestas cortas.
 
-TUS DATOS:
+PRECIOS ACTUALIZADOS (VE):
 1. WEB: Landing ($19), Corporativa ($35), E-Commerce ($60).
 2. SISTEMAS: Básico ($40), ERP ($80).
 3. BOTS: Atención ($25), Flujos ($55).
 
-DESCUENTOS (PAGO ADELANTADO):
-- 3 Meses: 5% OFF
-- 6 Meses: 10% OFF
-- 1 Año: 15% OFF
+DESCUENTOS PAGO ADELANTADO:
+- 3 Meses: 5% | 6 Meses: 10% | 1 Año: 15%
 
 CONTACTO:
 WhatsApp: +58 412 77 03302.
 ";
 
-// --- PETICIÓN A GOOGLE GEMINI USANDO CURL ---
-$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" . $apiKey;
+// --- PETICIÓN A DEEPSEEK ---
+$url = "https://api.deepseek.com/chat/completions";
 
+// Estructura estándar tipo OpenAI
 $data = [
-    "contents" => [
-        [
-            "role" => "user",
-            "parts" => [
-                ["text" => $systemPrompt . "\n\nConsulta del Cliente: " . $userMessage]
-            ]
-        ]
+    "model" => "deepseek-chat", // Modelo V3 (Rápido y barato)
+    "messages" => [
+        ["role" => "system", "content" => $systemPrompt],
+        ["role" => "user", "content" => $userMessage]
     ],
-    "generationConfig" => [
-        "temperature" => 0.7,
-        "maxOutputTokens" => 300
-    ]
+    "temperature" => 0.7,
+    "max_tokens" => 300
 ];
 
-// Inicializar cURL
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'Authorization: Bearer ' . $apiKey // Aquí va la clave ahora
+]);
 
-// [FIX] Solución para errores de certificado SSL en Localhost (XAMPP/WAMP)
-// En producción real, esto debería ser true, pero en local suele dar error.
+// Fix SSL Local
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
 
 $result = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 if(curl_errno($ch)){
-    // Error de conexión (DNS, Red, etc)
-    echo json_encode(['reply' => 'Error Interno (cURL): ' . curl_error($ch)]);
+    echo json_encode(['reply' => 'Error de conexión: ' . curl_error($ch)]);
 } else {
-    // Procesar respuesta
     $response = json_decode($result, true);
     
-    if ($httpCode !== 200) {
-        // Error de la API de Google (ej. Key inválida)
-        $errorMsg = $response['error']['message'] ?? 'Error desconocido de Google API';
-        echo json_encode(['reply' => 'Error API Google: ' . $errorMsg]);
+    // Verificar si hay error en la respuesta de la API
+    if (isset($response['error'])) {
+        echo json_encode(['reply' => 'Error DeepSeek: ' . $response['error']['message']]);
     } else {
-        // Éxito
-        $botReply = $response['candidates'][0]['content']['parts'][0]['text'] ?? 'No supe qué responder.';
+        // La respuesta está en choices -> 0 -> message -> content
+        $botReply = $response['choices'][0]['message']['content'] ?? 'No entendí eso.';
         echo json_encode(['reply' => $botReply]);
     }
 }
