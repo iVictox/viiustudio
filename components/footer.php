@@ -56,5 +56,8 @@
             easing: 'ease-out-cubic',
         });
     </script>
+
+<?php include_once 'components/chatbot.php'; ?>
+
 </body>
 </html>
