@@ -1,5 +1,5 @@
 <?php
-// servicios.php - Actualizado con Descuentos Trimestrales/Semestrales/Anuales
+// servicios.php - Viiu Studio (Versión Final con Diseño Jerárquico)
 require_once 'admin/config/db.php'; 
 
 $pageTitle = "Planes y Precios | Viiu Studio";
@@ -137,66 +137,89 @@ foreach ($categorias_planes as $key => $categoria):
                 <?php endif; ?>
 
                 <div class="p-8 flex-1 flex flex-col">
-                    <h3 class="text-xl font-bold text-slate-900 mb-1"><?php echo htmlspecialchars($plan['titulo']); ?></h3>
-                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-4">Plan Mensual</p>
+                    <h3 class="text-2xl font-extrabold text-slate-900 mb-2"><?php echo htmlspecialchars($plan['titulo']); ?></h3>
                     
-                    <div class="flex items-end mb-6 text-slate-900 relative">
-                        <span class="text-sm font-bold text-slate-400 absolute -top-4 left-0">Desde:</span>
-                        <span class="text-5xl font-extrabold tracking-tight">$<?php echo $precio_entero; ?></span>
-                        <div class="flex flex-col ml-1 mb-1">
-                            <span class="text-lg font-bold leading-none">.<?php echo $precio_decimal; ?></span>
-                            <span class="text-slate-500 text-xs font-medium uppercase">/mes</span>
+                    <span class="inline-flex items-center text-sm font-semibold text-blue-600/90 mb-6 bg-blue-50 px-3 py-1 rounded-full w-fit">
+                        <i class="far fa-calendar-alt mr-2"></i> Plan Mensual Base
+                    </span>
+                    
+                    <div class="mb-8 pt-4 border-t border-slate-100 relative">
+                         <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Precio desde:</span>
+                        
+                        <div class="flex items-end text-slate-900">
+                            <span class="text-6xl font-extrabold tracking-tight leading-none">$<?php echo $precio_entero; ?></span>
+                            <div class="flex flex-col ml-1.5 text-left pb-1">
+                                <span class="text-2xl font-bold leading-none text-slate-700">.<?php echo $precio_decimal; ?></span>
+                                <span class="text-slate-500 text-[11px] font-bold uppercase leading-none mt-1">/mes USD</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="bg-slate-50 rounded-xl p-4 mb-6 border border-slate-100">
-                        <p class="text-xs font-bold text-slate-500 uppercase mb-3 text-center border-b border-slate-200 pb-2">
-                            O ahorra pagando adelantado:
+                    <div class="bg-slate-50 rounded-xl p-5 mb-8 border border-slate-200/80 shadow-sm">
+                        <p class="text-xs font-bold text-slate-500 uppercase mb-4 flex items-center">
+                            <i class="fas fa-piggy-bank text-slate-400 mr-2 text-sm"></i>
+                            Opciones de Ahorro (Pago Único):
                         </p>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-600">3 Meses <span class="text-[10px] bg-green-100 text-green-700 px-1.5 rounded font-bold ml-1">-5%</span></span>
-                                <span class="font-bold text-slate-800">$<?php echo number_format($precio_trimestral, 2); ?></span>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center border-b border-slate-200 pb-2 border-dashed">
+                                <span class="text-slate-600 font-medium">3 Meses</span>
+                                <div class="text-right">
+                                    <span class="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded-md font-bold mr-2">-5% OFF</span>
+                                    <span class="font-bold text-slate-800 text-base">$<?php echo number_format($precio_trimestral, 2); ?></span>
+                                </div>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-600">6 Meses <span class="text-[10px] bg-green-100 text-green-700 px-1.5 rounded font-bold ml-1">-10%</span></span>
-                                <span class="font-bold text-slate-800">$<?php echo number_format($precio_semestral, 2); ?></span>
+                            <div class="flex justify-between items-center border-b border-slate-200 pb-2 border-dashed">
+                                <span class="text-slate-600 font-medium">6 Meses</span>
+                                <div class="text-right">
+                                    <span class="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded-md font-bold mr-2">-10% OFF</span>
+                                    <span class="font-bold text-slate-800 text-base">$<?php echo number_format($precio_semestral, 2); ?></span>
+                                </div>
                             </div>
-                            <div class="flex justify-between items-center bg-blue-50/50 p-1 -mx-1 rounded">
-                                <span class="text-blue-700 font-medium">1 Año <span class="text-[10px] bg-blue-100 text-blue-700 px-1.5 rounded font-bold ml-1 border border-blue-200">-<?php echo $desc_anual_pct; ?>%</span></span>
-                                <span class="font-bold text-blue-700">$<?php echo number_format($precio_anual, 2); ?></span>
+                             <div class="flex justify-between items-center bg-blue-100/50 p-2 -mx-2 rounded-lg relative overflow-hidden">
+                                <div class="absolute inset-0 bg-blue-200/20 animate-pulse pointer-events-none"></div>
+                                <span class="text-blue-800 font-bold flex items-center relative z-10">
+                                    <i class="fas fa-crown text-blue-500 mr-2 text-xs"></i> 1 Año
+                                </span>
+                                <div class="text-right relative z-10">
+                                    <span class="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded-md font-bold mr-2 border border-blue-600 shadow-sm">-<?php echo $desc_anual_pct; ?>% OFF</span>
+                                    <span class="font-extrabold text-blue-700 text-lg">$<?php echo number_format($precio_anual, 2); ?></span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mb-6 flex items-center justify-between text-xs border-t border-slate-100 pt-4">
-                        <span class="text-slate-500 font-medium">Instalación (Pago Único):</span>
+                    <div class="mb-6 flex items-center justify-between text-sm bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="text-slate-600 font-medium flex items-center">
+                            <i class="fas fa-tools text-slate-400 mr-2"></i> Instalación (Pago Único):
+                        </span>
                         <?php if($setupFee == 0): ?>
-                            <span class="font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase">Gratis</span>
+                            <span class="font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded uppercase text-xs tracking-wider">¡Gratis!</span>
                         <?php else: ?>
-                            <span class="font-bold text-slate-700">$<?php echo number_format($setupFee, 2); ?></span>
+                            <span class="font-bold text-slate-800">$<?php echo number_format($setupFee, 2); ?></span>
                         <?php endif; ?>
                     </div>
 
-                    <ul class="space-y-3 mb-8 flex-1">
+                    <ul class="space-y-3 mb-8 flex-1 border-t border-slate-100 pt-6">
                         <?php if(is_array($plan['features'])): foreach($plan['features'] as $feature): ?>
                         <li class="flex items-start">
-                            <i class="fas fa-check text-blue-500 mt-1 mr-3 text-xs flex-shrink-0"></i>
-                            <span class="text-slate-600 text-sm font-medium leading-tight"><?php echo htmlspecialchars($feature); ?></span>
+                            <div class="mt-1 mr-3 flex-shrink-0 w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-[10px]">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-slate-700 text-sm font-medium leading-snug"><?php echo htmlspecialchars($feature); ?></span>
                         </li>
                         <?php endforeach; endif; ?>
                     </ul>
 
                     <?php 
-                        $mensaje = "Hola Viiu Studio 👋, me interesa el plan *{$plan['titulo']}*. \n\nMe gustaría saber si tienen promoción por pago trimestral o semestral.";
+                        $mensaje = "Hola Viiu Studio 👋, estoy interesado en el plan *{$plan['titulo']}*. \n\nQuisiera más detalles para empezar.";
                         $linkWa = "https://wa.me/584127703302?text=" . urlencode($mensaje);
                     ?>
                     <a href="<?php echo $linkWa; ?>" target="_blank" 
-                       class="w-full inline-flex justify-center items-center py-3.5 rounded-xl font-bold transition-all duration-200
+                       class="w-full inline-flex justify-center items-center py-4 rounded-xl font-bold transition-all duration-200 text-lg group-hover:shadow-lg
                        <?php echo $esDestacado 
-                           ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/30 hover:-translate-y-1' 
-                           : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-blue-600 hover:text-blue-600'; ?>">
-                        Seleccionar Plan <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                           ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-blue-500/30 hover:from-blue-700 hover:to-blue-800 hover:-translate-y-1' 
+                           : 'bg-slate-900 text-white hover:bg-blue-600 hover:shadow-blue-500/20 hover:-translate-y-1'; ?>">
+                        Elegir este Plan <i class="fas fa-arrow-right ml-3 text-base group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
