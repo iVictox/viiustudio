@@ -1,5 +1,5 @@
 <?php
-// servicios.php - Viiu Studio (Versión Final con Animaciones AOS)
+// servicios.php - Actualizado con Descuentos Trimestrales/Semestrales/Anuales
 require_once 'admin/config/db.php'; 
 
 $pageTitle = "Planes y Precios | Viiu Studio";
@@ -52,17 +52,16 @@ try {
 
     <div class="max-w-screen-xl mx-auto px-4 relative z-10 text-center">
         <span data-aos="fade-down" data-aos-delay="100" class="inline-block py-1 px-3 rounded-full bg-blue-900/50 border border-blue-700 text-blue-300 text-xs font-bold uppercase tracking-widest mb-4">
-            Precios Transparentes
+            Precios Claros y Flexibles
         </span>
         
         <h1 data-aos="fade-up" data-aos-delay="200" class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
             Invierte en tecnología,<br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">no en problemas.</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">ahorra con planes a medida.</span>
         </h1>
         
         <p data-aos="fade-up" data-aos-delay="300" class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Sin letras pequeñas. Elige el plan que se adapte a tu etapa de crecimiento. 
-            Escala cuando lo necesites.
+            Elige tu plan mensual o aprovecha nuestros descuentos por pago adelantado (3, 6 o 12 meses). Sin letras pequeñas.
         </p>
         
         <div data-aos="fade-up" data-aos-delay="400" class="flex flex-wrap justify-center gap-3">
@@ -74,9 +73,6 @@ try {
             </a>
             <a href="#automatizacion" class="px-5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 hover:border-purple-500 hover:text-purple-400 transition-all text-sm font-bold flex items-center gap-2">
                 <i class="fas fa-robot"></i> Bots
-            </a>
-            <a href="#amedida" class="px-5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 hover:border-orange-500 hover:text-orange-400 transition-all text-sm font-bold flex items-center gap-2">
-                <i class="fas fa-ruler-combined"></i> A Medida
             </a>
         </div>
     </div>
@@ -101,16 +97,30 @@ foreach ($categorias_planes as $key => $categoria):
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
             <?php 
-            $delay = 0; // Reiniciar delay para cada categoría
+            $delay = 0; 
             foreach ($categoria['planes'] as $plan): 
                 $esDestacado = $plan['destacado'] ?? 0;
                 $setupFee = floatval($plan['setup_fee'] ?? 0);
-                $descuento = intval($plan['descuento_anual'] ?? 0);
-                $precio = floatval($plan['precio'] ?? 0);
-                $precio_entero = floor($precio);
-                $precio_decimal = sprintf("%02d", ($precio - $precio_entero) * 100);
                 
-                // Incremento de delay para efecto cascada (0, 100, 200...)
+                // Precios Base
+                $precio_mensual = floatval($plan['precio'] ?? 0);
+                
+                // --- CÁLCULO DE DESCUENTOS ---
+                // Trimestral (3 Meses) - 5% Descuento
+                $precio_trimestral = ($precio_mensual * 3) * 0.95;
+                
+                // Semestral (6 Meses) - 10% Descuento
+                $precio_semestral = ($precio_mensual * 6) * 0.90;
+                
+                // Anual (12 Meses) - Usamos DB o 15% por defecto
+                $desc_anual_pct = intval($plan['descuento_anual'] ?? 15);
+                if($desc_anual_pct == 0) $desc_anual_pct = 15;
+                $precio_anual = ($precio_mensual * 12) * (1 - ($desc_anual_pct/100));
+
+                // Formato Visual
+                $precio_entero = floor($precio_mensual);
+                $precio_decimal = sprintf("%02d", ($precio_mensual - $precio_entero) * 100);
+                
                 $delay += 100;
             ?>
             
@@ -127,55 +137,58 @@ foreach ($categorias_planes as $key => $categoria):
                 <?php endif; ?>
 
                 <div class="p-8 flex-1 flex flex-col">
-                    <h3 class="text-xl font-bold text-slate-900 mb-2"><?php echo htmlspecialchars($plan['titulo']); ?></h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1"><?php echo htmlspecialchars($plan['titulo']); ?></h3>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-4">Plan Mensual</p>
                     
-                    <div class="flex items-baseline my-4 text-slate-900">
+                    <div class="flex items-end mb-6 text-slate-900 relative">
+                        <span class="text-sm font-bold text-slate-400 absolute -top-4 left-0">Desde:</span>
                         <span class="text-5xl font-extrabold tracking-tight">$<?php echo $precio_entero; ?></span>
-                        <div class="flex flex-col ml-1">
+                        <div class="flex flex-col ml-1 mb-1">
                             <span class="text-lg font-bold leading-none">.<?php echo $precio_decimal; ?></span>
-                            <span class="text-slate-500 text-xs font-medium uppercase mt-1">/mes</span>
+                            <span class="text-slate-500 text-xs font-medium uppercase">/mes</span>
                         </div>
                     </div>
 
-                    <div class="bg-slate-50 rounded-lg p-4 mb-6 border border-slate-100 space-y-3">
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-slate-500 font-medium">Costo de Instalación:</span>
-                            
-                            <?php if($setupFee == 0): ?>
-                                <span class="font-extrabold text-green-600 bg-green-50 px-2 py-0.5 rounded border border-green-100 text-xs uppercase">
-                                    Gratis <span class="line-through text-green-800/40 normal-case ml-1">$50</span>
-                                </span>
-                            <?php elseif($setupFee > 0 && $setupFee < 30): ?>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-xs text-slate-400 line-through">$80</span>
-                                    <span class="font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">$<?php echo number_format($setupFee, 0); ?></span>
-                                </div>
-                            <?php else: ?>
-                                <span class="font-bold text-slate-800">$<?php echo number_format($setupFee, 2); ?></span>
-                            <?php endif; ?>
-                        </div>
-
-                        <?php if($descuento > 0): ?>
-                            <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs">
-                                <span class="text-slate-500">Plan Anual:</span>
-                                <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-1 rounded">
-                                    <i class="fas fa-arrow-down mr-1"></i>Ahorras <?php echo $descuento; ?>%
-                                </span>
+                    <div class="bg-slate-50 rounded-xl p-4 mb-6 border border-slate-100">
+                        <p class="text-xs font-bold text-slate-500 uppercase mb-3 text-center border-b border-slate-200 pb-2">
+                            O ahorra pagando adelantado:
+                        </p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-600">3 Meses <span class="text-[10px] bg-green-100 text-green-700 px-1.5 rounded font-bold ml-1">-5%</span></span>
+                                <span class="font-bold text-slate-800">$<?php echo number_format($precio_trimestral, 2); ?></span>
                             </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-600">6 Meses <span class="text-[10px] bg-green-100 text-green-700 px-1.5 rounded font-bold ml-1">-10%</span></span>
+                                <span class="font-bold text-slate-800">$<?php echo number_format($precio_semestral, 2); ?></span>
+                            </div>
+                            <div class="flex justify-between items-center bg-blue-50/50 p-1 -mx-1 rounded">
+                                <span class="text-blue-700 font-medium">1 Año <span class="text-[10px] bg-blue-100 text-blue-700 px-1.5 rounded font-bold ml-1 border border-blue-200">-<?php echo $desc_anual_pct; ?>%</span></span>
+                                <span class="font-bold text-blue-700">$<?php echo number_format($precio_anual, 2); ?></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 flex items-center justify-between text-xs border-t border-slate-100 pt-4">
+                        <span class="text-slate-500 font-medium">Instalación (Pago Único):</span>
+                        <?php if($setupFee == 0): ?>
+                            <span class="font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase">Gratis</span>
+                        <?php else: ?>
+                            <span class="font-bold text-slate-700">$<?php echo number_format($setupFee, 2); ?></span>
                         <?php endif; ?>
                     </div>
 
-                    <ul class="space-y-4 mb-8 flex-1">
+                    <ul class="space-y-3 mb-8 flex-1">
                         <?php if(is_array($plan['features'])): foreach($plan['features'] as $feature): ?>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3 text-sm flex-shrink-0"></i>
+                            <i class="fas fa-check text-blue-500 mt-1 mr-3 text-xs flex-shrink-0"></i>
                             <span class="text-slate-600 text-sm font-medium leading-tight"><?php echo htmlspecialchars($feature); ?></span>
                         </li>
                         <?php endforeach; endif; ?>
                     </ul>
 
                     <?php 
-                        $mensaje = "Hola Viiu Studio 👋, estoy interesado en el plan *{$plan['titulo']}*. ¿Podrían darme más información?";
+                        $mensaje = "Hola Viiu Studio 👋, me interesa el plan *{$plan['titulo']}*. \n\nMe gustaría saber si tienen promoción por pago trimestral o semestral.";
                         $linkWa = "https://wa.me/584127703302?text=" . urlencode($mensaje);
                     ?>
                     <a href="<?php echo $linkWa; ?>" target="_blank" 
@@ -183,7 +196,7 @@ foreach ($categorias_planes as $key => $categoria):
                        <?php echo $esDestacado 
                            ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/30 hover:-translate-y-1' 
                            : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-blue-600 hover:text-blue-600'; ?>">
-                        Contratar Ahora <i class="fab fa-whatsapp ml-2 text-lg"></i>
+                        Seleccionar Plan <i class="fas fa-arrow-right ml-2 text-sm"></i>
                     </a>
                 </div>
             </div>
@@ -236,11 +249,11 @@ foreach ($categorias_planes as $key => $categoria):
 
                 <div class="bg-slate-900/50 rounded-lg p-4 mb-8 border border-slate-700">
                     <div class="flex justify-between items-center text-sm mb-2">
-                        <span class="text-slate-400">Costo de Instalación:</span>
+                        <span class="text-slate-400">Instalación:</span>
                         <span class="font-bold text-white">Variable</span>
                     </div>
                     <div class="flex justify-between items-center text-sm">
-                        <span class="text-slate-400">Mantenimiento:</span>
+                        <span class="text-slate-400">Renovación:</span>
                         <span class="font-bold text-white">Bajo Demanda</span>
                     </div>
                 </div>
@@ -248,7 +261,6 @@ foreach ($categorias_planes as $key => $categoria):
                 <ul class="space-y-3 mb-8">
                     <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-orange-500 mt-1 mr-3"></i> Consultoría Técnica Especializada</li>
                     <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-orange-500 mt-1 mr-3"></i> Arquitectura de Software Escalable</li>
-                    <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-orange-500 mt-1 mr-3"></i> Integración de APIs complejas</li>
                     <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-orange-500 mt-1 mr-3"></i> Soporte Prioritario SLA</li>
                 </ul>
 
